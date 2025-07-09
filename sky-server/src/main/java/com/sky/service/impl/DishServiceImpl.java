@@ -140,4 +140,11 @@ public class DishServiceImpl implements DishService {
             }
         }
     }
+
+    public List<Dish> getByCategoryId(Long categoryId){
+        Dish dish = new Dish();
+        dish.setCategoryId(categoryId);
+        dish.setStatus(StatusConstant.ENABLE);
+        return dishMapper.getByCategoryId(dish);
+    }
 }
