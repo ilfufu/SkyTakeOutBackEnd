@@ -37,3 +37,11 @@ sky:
     admin-ttl: 7200000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+  alioss:
+    endpoint: ${sky.alioss.endpoint}
+    access-key-id: ${sky.alioss.access-key-id}
+    access-key-secret: ${sky.alioss.access-key-secret}
+    bucket-name:  ${sky.alioss.bucket-name}
+  file:
+    upload-dir: D:/MyTry/sky-take-out/sky-take-out-backend/sky-server/src/main/resources/uploads
+    access-url: http://localhost:8080/uploads
