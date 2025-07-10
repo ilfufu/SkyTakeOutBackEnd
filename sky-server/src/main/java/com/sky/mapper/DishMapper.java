@@ -21,7 +21,7 @@ public interface DishMapper {
     @AutoFill(value = OperationType.INSERT)
     void insert(Dish dish);
 
-    Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO    );
+    Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
 
     Dish getById(Long id);
 
