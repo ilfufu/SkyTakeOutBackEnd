@@ -10,11 +10,13 @@ import com.sky.entity.Setmeal;
 import com.sky.entity.SetmealDish;
 import com.sky.exception.DeletionNotAllowedException;
 import com.sky.exception.SetmealEnableFailedException;
+import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealDishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.DishService;
 import com.sky.service.SetmealService;
+import com.sky.vo.DishItemVO;
 import com.sky.vo.SetmealVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class SetmealServiceImpl implements SetmealService {
     private SetmealDishMapper setmealDishMapper;
 
     @Autowired
-    private DishService dishService;
+    private DishMapper dishMapper;
 
     @Transactional
     public void saveWithDish(SetmealDTO setmealDTO){
@@ -103,7 +105,7 @@ public class SetmealServiceImpl implements SetmealService {
          if(status == StatusConstant.ENABLE){
              List<SetmealDish> setmealDishes = setmealDishMapper.getBySetmealId(id);
              for(SetmealDish setmealDish : setmealDishes){
-                 if(dishService.getByIdWithFlavor(setmealDish.getDishId()).getStatus() == StatusConstant.DISABLE){
+                 if(dishMapper.getById(setmealDish.getDishId()).getStatus() == StatusConstant.DISABLE){
                      throw new SetmealEnableFailedException(MessageConstant.SETMEAL_ENABLE_FAILED);
                  }
              }
@@ -115,4 +117,14 @@ public class SetmealServiceImpl implements SetmealService {
                 .build();
         setmealMapper.update(setmeal);
     }
+
+    public List<Setmeal> list(Setmeal setmeal) {
+        List<Setmeal> list = setmealMapper.list(setmeal);
+        return list;
+    }
+
+    public List<DishItemVO> getDishItemById(Long id) {
+        return setmealMapper.getDishItemBySetmealId(id);
+    }
+
 }
