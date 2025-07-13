@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface DishMapper {
@@ -31,4 +32,6 @@ public interface DishMapper {
     void update(Dish dish);
 
     List<Dish> getByCategoryId(Dish dish);
+
+    Integer countByMap(Map map);
 }
